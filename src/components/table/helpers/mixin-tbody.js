@@ -126,7 +126,11 @@ export const tbodyMixin = Vue.extend({
     onTBodyRowClicked(event) {
       // Don't emit event when the table is busy, the user clicked
       // on a non-disabled control or is selecting text
-      if (this.tbodyRowEvtStopped(event) || filterEvent(event) || textSelectionActive(this.$el)) {
+      if (
+        this.tbodyRowEvtStopped(event) ||
+        filterEvent(event) ||
+        textSelectionActive(this.$el?.getElementsByTagName('tbody')[0])
+      ) {
         return
       }
       this.emitTbodyRowEvent(EVENT_NAME_ROW_CLICKED, event)
